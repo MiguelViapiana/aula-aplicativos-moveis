@@ -67,7 +67,7 @@ fun Layout(){
 @Composable
 fun MeuApp(innerPadding: Modifier = Modifier){
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        val tela = 1
+        val tela = 2
         val padding = Modifier.padding(innerPadding)
         when(tela){
             1 -> HomeScreen("Tela Principal", modifier = padding)
