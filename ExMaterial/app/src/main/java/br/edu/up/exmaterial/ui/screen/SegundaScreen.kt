@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
@@ -212,7 +213,8 @@ fun Layout(){
                     .fillMaxHeight()
                     .weight(1f)){
                     Image(painter = painterResource(id = R.drawable.travis),
-                        contentDescription = "Foto", modifier = Modifier.fillMaxSize())
+                        contentDescription = "Foto", modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Companion.FillHeight)
                 }
             }
             Column(modifier = Modifier.weight(1f)){
@@ -306,7 +308,9 @@ fun Layout(){
                     .fillMaxHeight()
                     .weight(1f)){
                     Image(painter = painterResource(id = R.drawable.kendrick),
-                        contentDescription = "Foto", modifier = Modifier.fillMaxSize())
+                        contentDescription = "Foto", modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Companion.FillHeight)
+
                 }
             }
         }
@@ -320,7 +324,8 @@ fun Layout(){
                     .fillMaxHeight()
                     .weight(1f)){
                     Image(painter = painterResource(id = R.drawable.dontoliver),
-                        contentDescription = "Foto", modifier = Modifier.fillMaxSize())
+                        contentDescription = "Foto", modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Companion.FillHeight)
                 }
             }
             Column(modifier = Modifier.weight(1f)){
