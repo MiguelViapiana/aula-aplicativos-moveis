@@ -124,10 +124,11 @@ private fun DrawerContent(navController: NavController, drawerState: DrawerState
                 //imageVector = Icons.Default.Call,
                 contentDescription = "C",
                 modifier = Modifier.size(40.dp),
-                tint = Color.Black
+                tint = getColorTexto(ehRotaUm)
             )
             Text(text = "Tela 1", fontSize = 30.sp,
-                color = Color.Black)
+                color = getColorTexto(ehRotaUm)
+            )
         }
 
         TextButton(colors = ButtonDefaults.buttonColors(
@@ -144,10 +145,11 @@ private fun DrawerContent(navController: NavController, drawerState: DrawerState
                 //imageVector = Icons.Default.Call,
                 contentDescription = "C",
                 modifier = Modifier.size(40.dp),
-                tint = Color.Black
+                tint = getColorTexto(ehRotaDois)
             )
             Text(text = "Tela 2", fontSize = 30.sp,
-                color = Color.Black)
+                color = getColorTexto(ehRotaDois)
+            )
         }
 
         TextButton(colors = ButtonDefaults.buttonColors(
@@ -164,15 +166,24 @@ private fun DrawerContent(navController: NavController, drawerState: DrawerState
                 //imageVector = Icons.Default.Call,
                 contentDescription = "C",
                 modifier = Modifier.size(40.dp),
-                tint = Color.Black
+                tint = getColorTexto(ehRotaTres)
             )
             Text(text = "Tela 3", fontSize = 30.sp,
-                color = Color.Black)
+                color = getColorTexto(ehRotaTres)
+            )
         }
 
 
     }
 }
+fun getColorTexto(estateSelecionada: Boolean): Color {
+    if(estateSelecionada){
+        return Color.White
+    }else{
+        return Color.Black
+    }
+}
+
 
 fun getColorMenu(estateSelecionada: Boolean): Color {
     if(estateSelecionada){
