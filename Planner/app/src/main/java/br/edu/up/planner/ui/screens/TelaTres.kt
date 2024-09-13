@@ -13,31 +13,24 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.launch
+import br.edu.up.planner.ui.screens.util.PlannerTopBar
 
 @Composable
-fun TarefasSceen(drawerState: DrawerState) {
+fun TelaTres(drawerState: DrawerState) {
     Scaffold(
-        topBar = { TopBarMinima(drawerState) },
+        topBar = { PlannerTopBar(drawerState = drawerState) },
         content = { padding -> ConteudoPrincipal(padding) },
         floatingActionButton = { FloatButtom() },
         bottomBar = { BottomAppBarMinima() }
@@ -88,38 +81,9 @@ private fun ConteudoPrincipal(padding: PaddingValues) {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Conteúdo", Modifier.padding(padding),
+            text = "Tela 3", Modifier.padding(padding),
             fontSize = 50.sp
         )
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopBarMinima(drawerState: DrawerState){
-
-    val escopo = rememberCoroutineScope()
-
-    TopAppBar(
-        navigationIcon = {
-            IconButton(onClick = {
-                escopo.launch {
-                    drawerState.open()
-                }
-            }) {
-                Icon(imageVector = Icons.Default.Menu,
-                    contentDescription = "Menu",
-                    tint = Color.White,
-                    modifier = Modifier.size(40.dp))
-            }
-        },
-        title = {
-            Text(text = "Planner",
-                fontSize = 40.sp,
-                color = Color.White,
-                fontWeight = FontWeight(600)
-            )
-        },
-        colors = TopAppBarDefaults.topAppBarColors(Color(0xFF03A9F4))
-    )
-}
