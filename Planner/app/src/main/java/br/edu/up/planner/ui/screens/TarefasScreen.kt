@@ -80,7 +80,6 @@ private fun FloatButtom() {
     }
 }
 
-
 @Composable
 private fun ConteudoPrincipal(padding: PaddingValues) {
     Column(

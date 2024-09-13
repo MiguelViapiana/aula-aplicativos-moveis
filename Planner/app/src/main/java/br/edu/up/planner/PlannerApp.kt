@@ -31,7 +31,6 @@ fun PlannerApp(){
 
     val drawerState = rememberDrawerState(
         initialValue = DrawerValue.Closed)
-    
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -55,56 +54,3 @@ private fun DrawerContent() {
         Text(text = "Item 3", fontSize = 30.sp)
     }
 }
-//@Composable
-//fun PlannerAppManual(){
-//    var tela = remember { mutableStateOf(1) }
-//    Surface(modifier = Modifier.fillMaxSize()) {
-//        Column {
-//            Row(modifier = Modifier
-//                .height(70.dp)
-//                .background(Color(0xC403A9F4))
-//                .fillMaxWidth(),
-//                horizontalArrangement = Arrangement.Center,
-//                verticalAlignment = Alignment.CenterVertically)
-//            {
-//                Text(text = "Planner",
-//                    fontSize = 30.sp,
-//                    color = Color.White,
-//                    fontWeight = FontWeight(800),
-//
-//                    )
-//            }
-//            Row(modifier = Modifier.weight(1f)) {
-//                when(tela.value){
-//                    1 -> PrimeiraTela()
-//                    2-> SegundaTela()
-//                }
-//            }
-//
-//            Row(modifier = Modifier
-//                .height(70.dp)
-//                .background(Color(0xC403A9F4))
-//                .fillMaxWidth(),
-//                horizontalArrangement = Arrangement.Center,
-//                verticalAlignment = Alignment.CenterVertically)
-//            {
-//                Button(onClick = {
-//                    tela.value = 1
-//                }, modifier = Modifier.padding(10.dp)) {
-//                    Text(text = "Tela 1", fontSize = 20.sp)
-//                }
-//                Button(onClick = {
-//                    tela.value = 2
-//                }, modifier = Modifier.padding(10.dp)) {
-//                    Text(text = "Tela 2", fontSize = 20.sp)
-//                }
-//            }
-//        }
-//
-//
-//    }
-//}
-
-
-
-
