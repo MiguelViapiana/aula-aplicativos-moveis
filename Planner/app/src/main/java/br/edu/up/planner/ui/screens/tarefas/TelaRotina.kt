@@ -17,7 +17,7 @@ import br.edu.up.planner.ui.screens.util.PlannerTopBar
 import br.edu.up.planner.ui.screens.util.TelaUmBotomBar
 
 @Composable
-fun TelaUmB(drawerState: DrawerState, navCtrlBottomNav: NavController) {
+fun TelaRotina(drawerState: DrawerState, navCtrlBottomNav: NavController) {
     Scaffold(
         topBar = { PlannerTopBar(drawerState = drawerState) },
         content = { padding -> padding

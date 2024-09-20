@@ -22,15 +22,15 @@ fun TarefasNavHost(drawerState: DrawerState) {
     {
         composable(TelaUm.TELA_AFAZERES_ROUTE)
         {
-            TelaUmA(drawerState, navCtrlBottomNav)
+            TelAfazeres(drawerState, navCtrlBottomNav)
         }
         composable(TelaUm.TELA_ROTINA_ROUTE)
         {
-            TelaUmB(drawerState, navCtrlBottomNav)
+            TelaRotina(drawerState, navCtrlBottomNav)
         }
         composable(TelaUm.TELA_NOTAS_ROUTE)
         {
-            TelaUmC(drawerState, navCtrlBottomNav)
+            TelaNotas(drawerState, navCtrlBottomNav)
         }
     }
 }

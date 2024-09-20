@@ -2,7 +2,6 @@ package br.edu.up.planner.ui.screens.tarefas
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,11 +18,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import br.edu.up.planner.ui.screens.util.PlannerTopBar
 import br.edu.up.planner.ui.screens.util.TelaUmBotomBar
 
+object TarefasRota{
+    val TELA_LISTAR_AFAZERES_ROTA = "listar_afazeres"
+    val TELA_INCLUIR_AFAZERE_ROTA = "incluir_afazer"
+}
+
+
 @Composable
-fun TelaUmA(drawerState: DrawerState, navCtrlBottomNav: NavController) {
+fun TelAfazeres(
+    drawerState: DrawerState,
+    navCtrlBottomNav: NavController
+) {
+
+
 
     var afazeres = mutableListOf(
         Afazer(
@@ -38,36 +51,46 @@ fun TelaUmA(drawerState: DrawerState, navCtrlBottomNav: NavController) {
         )
     )
 
+    val navCtrlTarefas = rememberNavController()
+
     Scaffold(
         topBar = { PlannerTopBar(drawerState = drawerState) },
         content = { padding ->
             padding
 
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                items(afazeres) { afazer ->
-                    Row {
-                        Column {
-                            Text(
-                                text = afazer.titulo,
-                                textAlign = TextAlign.Center,
-                                fontSize = 30.sp
-                            )
-                            Text(
-                                text = afazer.descricao,
-                                fontSize = 20.sp
-                            )
-                        }
-                    }
+            NavHost(navController = navCtrlTarefas, startDestination = TarefasRota.TELA_LISTAR_AFAZERES_ROTA ){
+                composable(TarefasRota.TELA_INCLUIR_AFAZERE_ROTA) {
+                    TelaListagemAfazeres(afazeres)
+                }
+                composable(TarefasRota.TELA_INCLUIR_AFAZERE_ROTA) {
+                    Text(text = "TELA DE INCLUIR AFAZER")
                 }
             }
+
         },
         bottomBar = { TelaUmBotomBar(navController = navCtrlBottomNav) },
         floatingActionButton = { FloatButtom() }
     )
+}
+
+@Composable
+private fun TelaListagemAfazeres(afazeres: MutableList<Afazer>) {
+
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        items(afazeres) { afazer ->
+            Column {
+                Text(
+                    text = afazer.titulo,
+                    textAlign = TextAlign.Center,
+                    fontSize = 30.sp
+                )
+            }
+        }
+    }
 }
 
 @Composable
