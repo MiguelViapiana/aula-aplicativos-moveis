@@ -78,7 +78,7 @@ fun ListAfazeresScreen(){
                     Afazer(titulo = "Afazer B", descricao = "B")
                 )
                 db.afazerDao().GravarAFazer(
-                    Afazer(titulo = "Afazer C", descricao = "c")
+                    Afazer(titulo = "Afazer C", descricao = "C")
                 )
             }
             afazeres = db.afazerDao().listarAfazeres()
