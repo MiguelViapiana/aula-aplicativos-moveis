@@ -4,6 +4,8 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
+import kotlinx.coroutines.flow.Flow
+
 
 // Objetos de manipulação do banco de dados
 
@@ -12,7 +14,7 @@ interface AfazerDao {
 
     //Listar
     @Query("select * from afazer")
-    suspend fun listarAfazeres(): List<Afazer>
+    suspend fun listarAfazeres(): Flow<List<Afazer>>
 
     //Buscar por Id
     @Query("select * from afazer where id = :idx")

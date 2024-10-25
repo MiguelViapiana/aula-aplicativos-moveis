@@ -1,6 +1,7 @@
 package br.escdodev.exroom.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -65,12 +66,31 @@ fun ListarAfazeresScreen(
             fontWeight = FontWeight.ExtraBold)
         Spacer(modifier = Modifier.height(10.dp))
         for(afazer in afazeres){
-            Text(text = afazer.titulo,
-                fontSize = 30.sp)
-        }
+            Row {
+                Text(text = afazer.titulo,
 
+                    fontSize = 30.sp)
+                Button(onClick = {
+                    coroutineScope.launch { 
+                        db.afazerDao().excluirAfazer(afazer)
+                        afazeres = db.afazerDao().listarAfazeres()
+                    }
+                }) {
+                    Text(text = "Excluir", fontSize = 15.sp)
+                    
+                }
+                Button(onClick = {
+                    coroutineScope.launch {
+                        navController.navigate("editarAfazer/${afazer.id}")
+                    }
+                }) {
+                    Text(text = "Editar", fontSize = 15.sp)
+
+                }
+            }
+        }
         Button(onClick = {
-            navController.navigate("incluirAfazeres")
+            navController.navigate("incluirAfazeres/")
         }) {
             Text(text = "Novo Afazer")
         }

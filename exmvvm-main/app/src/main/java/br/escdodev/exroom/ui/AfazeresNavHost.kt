@@ -19,7 +19,11 @@ fun AfazeresNavHost(
             ListarAfazeresScreen(db, navController)
         }
         composable("incluirAfazeres") {
-            IncluirEditarAfazerScreen(db, navController)
+            IncluirEditarAfazerScreen(db, navController )
+        }
+        composable("editarAfazer/{afazerId}") { navRequest ->
+            val afazerId = navRequest.arguments?.getString("afazerId")
+            IncluirEditarAfazerScreen(db, navController,afazerId?.toInt())
         }
     }
 }

@@ -8,32 +8,49 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import br.escdodev.exroom.data.Afazer
 import br.escdodev.exroom.data.AfazerDatabase
-import br.escdodev.exroom.data.AfazerDatabase.Companion.abrirBancoDeDados
 import kotlinx.coroutines.launch
 
 @Composable
 fun IncluirEditarAfazerScreen(
     db: AfazerDatabase,
-    navController: NavController
+    navController: NavController,
+    afazerId: Int? = null
 ){
     var coroutineScope = rememberCoroutineScope()
 
     // Dados do novo afazer
     var titulo by remember {  mutableStateOf( "") }
     var descricao by remember { mutableStateOf( "") }
+
+    var afazer: Afazer? by remember { mutableStateOf(null) }
+
+    val label = "Novo afazer"
+
+    LaunchedEffect(afazerId) {
+        coroutineScope.launch {
+            if(afazerId != null){
+                afazer = db.afazerDao().buscarAfazerPorId(afazerId)
+                afazer?.let{
+                    titulo = it.titulo
+                    descricao = it.descricao
+                }
+            }
+        }
+    }
 
     Column(
         modifier = Modifier.padding(
@@ -62,11 +79,12 @@ fun IncluirEditarAfazerScreen(
         Button(onClick = {
             //Serve para disparar o segundo processo
             coroutineScope.launch {
-                val novoAfazer = Afazer(
+                val afazerSalvar = Afazer(
+                    id = afazerId,
                     titulo = titulo,
                     descricao = descricao
                 )
-                db.afazerDao().gravarAfazer(novoAfazer)
+                db.afazerDao().gravarAfazer(afazerSalvar)
 //                afazeres = db.afazerDao().listarAfazeres()
                 navController.navigate("listarAfazeres")
             }
