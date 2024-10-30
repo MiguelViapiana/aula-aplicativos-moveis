@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun IncluirEditarAfazerScreen(
-    db: AfazerDatabase,
+    viewModel: AfazerViewModel,
     navController: NavController,
     afazerId: Int? = null
 ){
@@ -43,7 +43,7 @@ fun IncluirEditarAfazerScreen(
     LaunchedEffect(afazerId) {
         coroutineScope.launch {
             if(afazerId != null){
-                afazer = db.afazerDao().buscarAfazerPorId(afazerId)
+                afazer = viewModel.buscarAfazerPorId(afazerId)
                 afazer?.let{
                     titulo = it.titulo
                     descricao = it.descricao
@@ -84,8 +84,7 @@ fun IncluirEditarAfazerScreen(
                     titulo = titulo,
                     descricao = descricao
                 )
-                db.afazerDao().gravarAfazer(afazerSalvar)
-//                afazeres = db.afazerDao().listarAfazeres()
+                viewModel.gravar(afazerSalvar)
                 navController.navigate("listarAfazeres")
             }
         }) {

@@ -8,7 +8,7 @@ import br.escdodev.exroom.data.AfazerDatabase
 
 @Composable
 fun AfazeresNavHost(
-    db: AfazerDatabase
+    viewModel: AfazerViewModel
 ){
     val navController = rememberNavController()
 
@@ -16,14 +16,14 @@ fun AfazeresNavHost(
         navController = navController, startDestination = "listarAfazeres"
     ) {
         composable("listarAfazeres") {
-            ListarAfazeresScreen(db, navController)
+            ListarAfazeresScreen(viewModel, navController)
         }
         composable("incluirAfazeres") {
-            IncluirEditarAfazerScreen(db, navController )
+            IncluirEditarAfazerScreen(viewModel, navController )
         }
         composable("editarAfazer/{afazerId}") { navRequest ->
             val afazerId = navRequest.arguments?.getString("afazerId")
-            IncluirEditarAfazerScreen(db, navController,afazerId?.toInt())
+            IncluirEditarAfazerScreen(viewModel, navController,afazerId?.toInt())
         }
     }
 }

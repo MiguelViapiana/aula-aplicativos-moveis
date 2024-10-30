@@ -10,6 +10,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,30 +29,32 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ListarAfazeresScreen(
-    db: AfazerDatabase,
+    viewModel: AfazerViewModel,
     navController: NavController
 ){
     var coroutineScope = rememberCoroutineScope()
 
     // Popular e carregar dados do banco
-    var afazeres by remember { mutableStateOf(listOf<Afazer>()) }
+    //var afazeres by remember { mutableStateOf(listOf<Afazer>()) }
+    val afazeres by viewModel.afazeres.collectAsState()
 
-    LaunchedEffect(Unit) {
-        coroutineScope.launch {
-            if(db.afazerDao().listarAfazeres().isEmpty()){
-                db.afazerDao().gravarAfazer(
-                    Afazer(titulo="Afazer A", descricao = "A")
-                )
-                db.afazerDao().gravarAfazer(
-                    Afazer(titulo="Afazer B", descricao = "B")
-                )
-                db.afazerDao().gravarAfazer(
-                    Afazer(titulo="Afazer C", descricao = "C")
-                )
-            }
-            afazeres = db.afazerDao().listarAfazeres()
-        }
-    }
+
+//    LaunchedEffect(Unit) {
+//        coroutineScope.launch {
+//            if(db.afazerDao().listarAfazeres().isEmpty()){
+//                db.afazerDao().gravarAfazer(
+//                    Afazer(titulo="Afazer A", descricao = "A")
+//                )
+//                db.afazerDao().gravarAfazer(
+//                    Afazer(titulo="Afazer B", descricao = "B")
+//                )
+//                db.afazerDao().gravarAfazer(
+//                    Afazer(titulo="Afazer C", descricao = "C")
+//                )
+//            }
+//            afazeres = db.afazerDao().listarAfazeres()
+//        }
+//    }
     Column(
         modifier = Modifier.padding(
             top =  90.dp,
@@ -71,13 +74,10 @@ fun ListarAfazeresScreen(
 
                     fontSize = 30.sp)
                 Button(onClick = {
-                    coroutineScope.launch { 
-                        db.afazerDao().excluirAfazer(afazer)
-                        afazeres = db.afazerDao().listarAfazeres()
-                    }
+                    viewModel.excluir(afazer)
                 }) {
                     Text(text = "Excluir", fontSize = 15.sp)
-                    
+
                 }
                 Button(onClick = {
                     coroutineScope.launch {
@@ -90,7 +90,7 @@ fun ListarAfazeresScreen(
             }
         }
         Button(onClick = {
-            navController.navigate("incluirAfazeres/")
+            navController.navigate("incluirAfazeres")
         }) {
             Text(text = "Novo Afazer")
         }

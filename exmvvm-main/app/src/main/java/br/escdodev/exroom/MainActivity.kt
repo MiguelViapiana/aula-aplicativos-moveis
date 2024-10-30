@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.escdodev.exroom.data.AfazerDatabase
 import br.escdodev.exroom.data.AfazerDatabase.Companion.abrirBancoDeDados
+import br.escdodev.exroom.ui.AfazerViewModel
 import br.escdodev.exroom.ui.AfazeresNavHost
 import br.escdodev.exroom.ui.IncluirEditarAfazerScreen
 import br.escdodev.exroom.ui.ListarAfazeresScreen
@@ -20,8 +21,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val db = abrirBancoDeDados(this)
+        val viewModel = AfazerViewModel(db.afazerDao())
         setContent {
-            AfazeresNavHost(db)
+            AfazeresNavHost(viewModel)
         }
     }
 }
