@@ -5,6 +5,7 @@ plugins {
     //Adicionar
     kotlin("plugin.serialization")
     id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
     //id("com.google.dagger.hilt.android")
 }
 
@@ -79,4 +80,7 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
+
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation("com.google.firebase:firebase-analytics")
 }

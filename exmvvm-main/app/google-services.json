@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "870714300337",
+    "project_id": "planner-a299a",
+    "storage_bucket": "planner-a299a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870714300337:android:2295faad09681da4198f90",
+        "android_client_info": {
+          "package_name": "br.migas.firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY8jb5EZgeQlaGUUtLspgyc2scpHmJLtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
