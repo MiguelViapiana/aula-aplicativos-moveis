@@ -12,4 +12,6 @@ data class Afazer(
     val titulo: String,
     val descricao: String,
     val concluido: Boolean = false
-)
+){
+    constructor() : this(null, "", "", false)
+}

@@ -3,7 +3,7 @@ package br.escdodev.exroom.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.escdodev.exroom.data.Afazer
-import br.escdodev.exroom.data.AfazerDao
+import br.escdodev.exroom.data.IRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,24 +12,24 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class AfazerViewModel(
-    private val dao: AfazerDao
+    private val repositry: IRepository
 ): ViewModel() {
 
     fun excluir(afazer: Afazer) {
         viewModelScope.launch {
-            dao.excluirAfazer(afazer)
+            repositry.excluirAfazer(afazer)
         }
     }
 
     suspend fun buscarAfazerPorId(afazerId: Int): Afazer? {
         return withContext(Dispatchers.IO){
-            dao.buscarAfazerPorId(afazerId)
+            repositry.buscarAfazerPorId(afazerId)
         }
     }
 
     fun gravar(afazerSalvar: Afazer) {
         viewModelScope.launch {
-            dao.gravarAfazer(afazerSalvar)
+            repositry.gravarAfazer(afazerSalvar)
         }
     }
 
@@ -38,7 +38,7 @@ class AfazerViewModel(
 
     init {
         viewModelScope.launch {
-            dao.listarAfazeres().collectLatest { listaDeAfazeres ->
+            repositry.listarAfazeres().collectLatest { listaDeAfazeres ->
                 _afazeres.value = listaDeAfazeres
             }
         }

@@ -71,8 +71,8 @@ fun ListarAfazeresScreen(
         for(afazer in afazeres){
             Row {
                 Text(text = afazer.titulo,
-
-                    fontSize = 30.sp)
+                    fontSize = 30.sp,
+                    modifier = Modifier.padding(5.dp))
                 Button(onClick = {
                     viewModel.excluir(afazer)
                 }) {

@@ -4,24 +4,31 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import br.escdodev.exroom.data.AfazerDatabase
 import br.escdodev.exroom.data.AfazerDatabase.Companion.abrirBancoDeDados
+import br.escdodev.exroom.data.LocalRepository
+import br.escdodev.exroom.data.RemoteRepository
 import br.escdodev.exroom.ui.AfazerViewModel
 import br.escdodev.exroom.ui.AfazeresNavHost
-import br.escdodev.exroom.ui.IncluirEditarAfazerScreen
-import br.escdodev.exroom.ui.ListarAfazeresScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val is_local = false
+
         val db = abrirBancoDeDados(this)
-        val viewModel = AfazerViewModel(db.afazerDao())
+        //val viewModel = AfazerViewModel(db.afazerDao())
+        val localRepository = LocalRepository(db.afazerDao())
+        val remoteRepository = RemoteRepository()
+        val viewModel : AfazerViewModel
+
+        if(is_local){
+            viewModel = AfazerViewModel(localRepository)
+        }else{
+            viewModel = AfazerViewModel(remoteRepository)
+        }
+
         setContent {
             AfazeresNavHost(viewModel)
         }
